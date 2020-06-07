@@ -1,0 +1,23 @@
+{
+  "name": "food-supplychain-ethereum",
+  "version": "1.0.0",
+  "description": "Projeto Blockchain Pós-Graduação - Arquitetura de Software Distribuído - Puc",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bvaugusto/food-supplychain-ethereum.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bvaugusto/food-supplychain-ethereum/issues"
+  },
+  "homepage": "https://github.com/bvaugusto/food-supplychain-ethereum#readme",
+  "dependencies": {
+    "solc": "^0.4.18",
+    "web3": "^0.20.0"
+  }
+}
