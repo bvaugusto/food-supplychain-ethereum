@@ -1,5 +1,3 @@
-npm init
-npm install web3@0.20.0 solc@0.4.18
 node
 
 Web3 = require('web3')
@@ -11,12 +9,10 @@ compiledCode = solc.compile(sourceCode)
 contractABI = JSON.parse(compiledCode.contracts[':FoodSuplyChain'].interface)
 
 FoodSuplyChainContract = web3.eth.contract(contractABI)
-
 byteCode = compiledCode.contracts[':FoodSuplyChain'].bytecode
 
 smartContractDeployed = FoodSuplyChainContract.new({data:byteCode, from:web3.eth.accounts[0], gas:4700000})
+smartContractInstance =  FoodSuplyChainContract.at(smartContractDeployed.address)
 smartContractDeployed.address
 
-smartContractInstance =  FoodSuplyChainContract.at(smartContractDeployed.address)
 
-.exit
