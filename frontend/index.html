@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <title>Compra/Venda</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="./node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./node_modules/font-awesome/css/font-awesome.min.css">
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+    <a class="navbar-brand" href="javascript:">Food Supplychain Ethereum</a>
+  </nav>
+
+  <div class="container">
+    <h2>Transações</h2>
+    <div class="table-responsive">
+      <table class="table table-striped table-sm">
+        <thead>
+          <tr>
+            <th>Contratos</th>
+            <th>Produto</th>
+            <th>Fabricante</th>
+            <th>Distribuidor</th>
+            <th>Revendedor</th>
+            <th>Ação</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>xxxxxxxxx</td>
+            <td>xxxxxxxxx</td>
+            <td>xxxxxxxxx</td>
+            <td>xxxxxxxxx</td>
+            <td>xxxxxxxxx</td>
+            <td><i class="far fa-eye"></i></td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </div>
+    <h1>Produtos</h1>
+    <form>
+      <div class="form-group">
+        <label for="carteira">Carteira</label>
+        <select id="carteira" class="form-control">
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="nome">Nome:</label>
+        <input type="text" class="form-control" id="nome">
+      </div>
+      <div class="form-group">
+        <label for="descricao">Descrição:</label>
+        <input type="text" class="form-control" id="descricao">
+      </div>
+      <div class="form-group">
+        <label for="preco">Preço:</label>
+        <input type="text" class="form-control" id="preco">
+      </div>
+      <button id="btnAnunciar" class="btn btn-primary">Anunciar</button>
+    </form>
+
+    <hr />
+
+    <div id="produtos"></div>
+
+  </div>
+  <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="./node_modules/web3/dist/web3.js"></script>
+  <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="./scripts.js"></script>
+</body>
+
+</html>

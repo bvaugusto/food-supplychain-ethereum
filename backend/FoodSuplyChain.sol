@@ -107,5 +107,4 @@ contract FoodSuplyChain {
     Dealer storage dealer = dealers[_id];
     return (dealer.resellerName, dealer.storageLocation, dealer.temperature);
   }
-
 }
