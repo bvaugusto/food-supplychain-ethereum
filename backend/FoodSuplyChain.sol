@@ -39,13 +39,14 @@ contract FoodSuplyChain {
   mapping (uint => Manufacturer) public manufacturers;
   mapping (uint => Distributor) public distributors;
   mapping (uint => Dealer) public dealers;
+  mapping (uint => string) public nextAction;
 
-  uint chains;
+  uint chainsId;
 
   function setProducer(uint _id, string _name, string _category, string _description, string _weight) payable public  {
-    chains++;
+    chainsId++;
 
-    producers[_id] = Producer(
+    producers[chainsId] = Producer(
       _id,
       msg.sender,
       _name,
@@ -53,47 +54,70 @@ contract FoodSuplyChain {
       _description,
       _weight
     );
+
+    nextAction[chainsId] = 'MANUFACTURER';
   }
 
-  function setManufacturer(uint _id, string _product, string _shelfLife, string _packageType) payable public  {
+  function setManufacturer(uint _chainId, uint _id, string _product, string _shelfLife, string _packageType) payable public  {
 
-    manufacturers[_id] = Manufacturer(
+    manufacturers[_chainId] = Manufacturer(
       _id,
       msg.sender,
       _product,
       _shelfLife,
       _packageType
     );
+
+    nextAction[chainsId] = 'DISTRIBUTOR';
   }
 
-  function setDistributor(uint _id, string _recipient, string _estimatedReceivingDate, string _transportType) payable public  {
+  function setDistributor(uint _chainId, uint _id, string _recipient, string _estimatedReceivingDate, string _transportType) payable public  {
 
-    distributors[_id] = Distributor(
+    distributors[_chainId] = Distributor(
       _id,
       msg.sender,
       _recipient,
       _estimatedReceivingDate,
       _transportType
     );
+
+    nextAction[chainsId] = 'DEALER';
   }
 
-  function setDealer(uint _id, string _resellerName, string _storageLocation, string _temperature) payable public  {
+  function setDealer(uint _chainId, uint _id, string _resellerName, string _storageLocation, string _temperature) payable public  {
 
-    dealers[_id] = Dealer(
+    dealers[_chainId] = Dealer(
       _id,
       msg.sender,
       _resellerName,
       _storageLocation,
       _temperature
     );
+
+    nextAction[chainsId] = 'DONE';
+  }
+
+  // retorna as cadeias de suprimentos.
+  function getchains() public view returns (uint[]) {
+    uint[] memory chainsIds = new uint[](chainsId);
+
+    for(uint i = 0; i < chainsId; i++) {
+      chainsIds[i] = i + 1; 
+    }
+
+    return chainsIds;
+  }
+
+  function getNextAction(uint _chainId) public view returns (string) {
+    return nextAction[_chainId];
   }
 
   //retorna os produtores armazenados
   function getProducersChains() public view returns (uint[]) {
-    uint[] memory chainsIds = new uint[](chains);
+    uint[] memory chainsIds = new uint[](chainsId);
 
     uint numberOfinitializedChains = 0;
-    for(uint i = 1; i <= chains; i++) {
+    for(uint i = 1; i <= chainsId; i++) {
         chainsIds[numberOfinitializedChains] = producers[i].id;
         numberOfinitializedChains++;
     }
