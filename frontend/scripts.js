@@ -4,7 +4,7 @@ if (typeof web3 !== 'undefined') {
   web3 = new Web3(web3.currentProvider);
 } else {
   console.log('Usando Ganache');
-  web3 = new Web3(new Web3.providers.HttpProvider("HTTP://127.0.0.1:7545"));
+  web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:7545"));
 }
 
 //define conta padrão
@@ -298,8 +298,8 @@ $('#btnAnunciar').click(function () {
 });
 
 //mostrando os itens a venda
-function itensvenda() {
-  contract.getArticlesForSale(function (error, result) {
+function producersInChains() {
+  contract.getProducersChains(function (error, result) {
     if (!error) {
       $.each(result, function (index, value) {
         contract.getProducer(value, function (error, result) {
@@ -310,10 +310,9 @@ function itensvenda() {
               '    <h5 class="card-title">' + result[0] + '</h5>' +
               '    <h6 class="card-subtitle mb-2 text-muted">ETH ' + web3.fromWei(result[2], "ether") + '</h6>' +
               '    <p class="card-text">' + result[1] + '</p>' +
-              '    <a href="#void" class="card-link" onclick="comprar(' + value + ');">Comprar</a>' +
               '  </div>' +
               '</div>';
-            $('#produtos').append(card);
+            $('#chains').append(card);
           } else {
             console.log('error => ', error);
           }

@@ -88,6 +88,25 @@ contract FoodSuplyChain {
     );
   }
 
+  //retorna os produtores armazenados
+  function getProducersChains() public view returns (uint[]) {
+    uint[] memory chainsIds = new uint[](chains);
+
+    uint numberOfinitializedChains = 0;
+    for(uint i = 1; i <= chains; i++) {
+        chainsIds[numberOfinitializedChains] = producers[i].id;
+        numberOfinitializedChains++;
+    }
+
+    //copia para array de itens
+    uint[] memory registries = new uint[](numberOfinitializedChains);
+    for(uint j = 0; j < numberOfinitializedChains; j++) {
+      registries[j] = chainsIds[j];
+    }
+
+    return registries;
+  }
+
   function getProducerById(uint _id) public view returns (string, string, string, string) {
     Producer storage producer = producers[_id];
     return (producer.name, producer.category, producer.description, producer.weight);
