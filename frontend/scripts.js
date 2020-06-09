@@ -2,14 +2,8 @@ var globContract = false;
 
 window.addEventListener("load", function(){
   //instancia o web3
-  if (typeof web3 !== 'undefined') {
-    console.log('Usando MetaMask');
-    web3 = new Web3(web3.currentProvider);
-  } else {
-    console.log('Usando Ganache');
-    web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:7545"));
-  }
-
+  web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:7545"));
+  
   //define conta padrão
   web3.eth.defaultAccount = web3.eth.coinbase;
 
@@ -460,30 +454,13 @@ window.addEventListener("load", function(){
   ]);
 
   //aponta para publicado
-  globContract = contractABI.at('0x06ed600bA7C46a7673b348393e4960AC030BAE63');
+  globContract = contractABI.at('0x1B7401882C5c638819c38b85dC7Aea16b31092d6');
 
   buildChainsTable();
 
 });
 
-
-//preenche carteiras para comprar
-/*var accounts = web3.eth.accounts;
-var option = '';
-for (var i = 0; i < accounts.length; i++) {
-  option += '<option value="' + accounts[i] + '">' + accounts[i] + '</option>';
-}
-
-$('#carteira').append(option);*/
-
-/*//ação do botão anunciar
-$('#btnAnunciar').click(function () {
-  var nome = $('#nome').val();
-  var descricao = $('#descricao').val();
-  var preco = $('#preco').val();
-  contract.setProducer(nome, descricao, web3.toWei(preco, "ether"), { from: $('#carteira').val(), gas: 3000000 });
-});*/
-
+//Preenche as cadeias de suprimentos
 function buildChainsTable() {
   globContract.getchains(function (error, result) {
     if (!error) {
@@ -501,7 +478,6 @@ function buildChainsTable() {
                       <td><span class="badge badge-secondary">Indisponível</span> </td>
                       <td><span class="badge badge-secondary">Indisponível</span> </td>
                       <td><span class="badge badge-secondary">Indisponível</span> </td>
-                      <td><i class="far fa-eye"></i></td>
                     </tr>`;
             } else if (result == 'DISTRIBUTOR') {
               tr = `<tr>
@@ -510,7 +486,6 @@ function buildChainsTable() {
                       <td><span class="badge badge-warning">Processando</span> </td>
                       <td><span class="badge badge-secondary">Indisponível</span> </td>
                       <td><span class="badge badge-secondary">Indisponível</span> </td>
-                      <td><i class="far fa-eye"></i></td>
                     </tr>`;
             } else if (result == 'DEALER') {
               tr = `<tr>
@@ -519,7 +494,6 @@ function buildChainsTable() {
                       <td><span class="badge badge-success">Concluído</span> </td>
                       <td><span class="badge badge-warning">processando</span> </td>
                       <td><span class="badge badge-secondary">Indisponível</span> </td>
-                      <td><i class="far fa-eye"></i></td>
                     </tr>`;
             } else if (result == 'DONE') {
               tr = `<tr>
@@ -528,7 +502,6 @@ function buildChainsTable() {
                       <td><span class="badge badge-success">Concluído</span> </td>
                       <td><span class="badge badge-success">Concluído</span> </td>
                       <td><span class="badge badge-success">Concluído</span> </td>
-                      <td><i class="far fa-eye"></i></td>
                     </tr>`;
             }
 
@@ -545,41 +518,117 @@ function buildChainsTable() {
   });
 }
 
-// Produtores
-function producersInChains() {
-  globContract.getProducersChains(function (error, result) {
-    if (!error) {
-      $.each(result, function (index, value) {
-        globContract.getProducerById(value, function (error, result) {
-          console.log(result);
-          // if (!error) {
-          //   var card =
-          //     '<div class="card">' +
-          //     '  <div class="card-body">' +
-          //     '    <h5 class="card-title">' + result[0] + '</h5>' +
-          //     '    <h6 class="card-subtitle mb-2 text-muted">ETH ' + web3.fromWei(result[2], "ether") + '</h6>' +
-          //     '    <p class="card-text">' + result[1] + '</p>' +
-          //     '  </div>' +
-          //     '</div>';
-          //   $('#chains').append(card);
-          // } else {
-          //   console.log("else");
-          //   console.log('error => ', error);
-          // }
-        });
-      });
-    } else {
-      console.log(error);
-    }
-  });
-}
+$('#btnAdicionarProdutor').click(function(){
+  var prodId = $('#prodId').val();
+  var name = $('#name').val();
+  var category = $('#category').val();
+  var description = $('#description').val();
+  var weight = $('#weight').val();
+  globContract.setProducer(prodId, name, category, description, weight, {from: $('#carteira').val(), gas: 3000000});
+}); 
 
-function comprar(id) {
-  globContract.getArticle(id, function (error, result) {
+$('#btnAdicionarFabricante').click(function(){
+  var fabrId = $('#FabrId').val();
+  var productF = $('#productF').val();
+  var shelfLife = $('#shelfLife').val();
+  var packageType = $('#packageType').val();
+  globContract.setManufacturer(fabrId, fabrId, productF, shelfLife, packageType, {from: $('#carteira').val(), gas: 3000000});
+});
+
+$('#btnAdicionarDistribuidor').click(function(){
+  var distId = $('#DistId').val();
+  var recipient = $('#recipient').val();
+  var estimatedReceivingDate = $('#estimatedReceivingDate').val();
+  var transportType = $('#transportType').val();
+  globContract.setDistributor(distId, distId, recipient, estimatedReceivingDate, transportType, {from: $('#carteira').val(), gas: 3000000});
+});
+
+$('#btnAdicionarRevendedor').click(function(){
+  var revId = $('#RevId').val();
+  var resellerName = $('#resellerName').val();
+  var storageLocation = $('#storageLocation').val();
+  var temperature = $('#temperature').val();
+  globContract.setDealer(revId, revId, resellerName, storageLocation, temperature, {from: $('#carteira').val(), gas: 3000000});
+});
+
+//Preencher Modal com a cadeia
+$('#btnAnunciar').click(function(){
+  var _chainId = $('#chainId').val();
+
+  $("#producer").html("");
+  $("#manufacturer").html("");
+  $("#distributor").html("");
+  $("#dealer").html("");
+
+  globContract.getProducerById(_chainId, function (error, result) {
     if (!error) {
-      globContract.buyArticle(id, { from: $('#carteira').val(), value: result[2], gas: 3000000 });
-    } else {
-      console.log(error);
-    }
+      var card =
+         '<div class="card">' +
+         '  <div class="card-body">' +
+         '    <p class="card-text"> Nome: ' + result[0] + '</p>' +
+         '    <p class="card-text"> Categoria: ' + result[1] + '</p>' +
+         '    <p class="card-text"> Descrição: ' + result[2] + '</p>' +
+         '    <p class="card-text"> Peso: ' + result[3] + '</p>' +
+         '  </div>' +
+         '</div>' +
+         '<i class="fa fa-angle-double-down" style="font-size:36px;"></i>';
+       $('#producer').append(card);
+     } else {
+       console.log("else");
+       console.log('error => ', error);
+     }
   });
-}
+
+  globContract.getManufacturerById(_chainId, function (error, result) {
+    if (!error) {
+      var card =
+         '<div class="card">' +
+         '  <div class="card-body">' +
+         '    <p class="card-text"> Novo Produto: ' + result[0] + '</p>' +
+         '    <p class="card-text"> Validade: ' + result[1] + '</p>' +
+         '    <p class="card-text"> Tipo de Embalagem: ' + result[2] + '</p>' +
+         '  </div>' +
+         '</div>' +
+         '<i class="fa fa-angle-double-down" style="font-size:36px"></i>';
+       $('#manufacturer').append(card);
+     } else {
+       console.log("else");
+       console.log('error => ', error);
+     }
+  });
+
+  globContract.getDistributorById(_chainId, function (error, result) {
+    if (!error) {
+      var card =
+         '<div class="card">' +
+         '  <div class="card-body">' +
+         '    <p class="card-text"> Recipiente: ' + result[0] + '</p>' +
+         '    <p class="card-text"> Data Estimada De Entrega: ' + result[1] + '</p>' +
+         '    <p class="card-text"> Temperatura do Local: ' + result[2] + '</p>' +
+         '  </div>' +
+         '</div>' +
+         '<i class="fa fa-angle-double-down" style="font-size:36px"></i>';
+       $('#distributor').append(card);
+     } else {
+       console.log("else");
+       console.log('error => ', error);
+     }
+  });
+
+  globContract.getDealerById(_chainId, function (error, result) {
+    if (!error) {
+      var card =
+         '<div class="card">' +
+         '  <div class="card-body">' +
+         '    <p class="card-text"> Revendedor: ' + result[0] + '</p>' +
+         '    <p class="card-text"> Local Armazenamento: ' + result[1] + '</p>' +
+         '    <p class="card-text"> Temperatura do Local: ' + result[2] + '</p>' +
+         '  </div>' +
+         '</div>';
+       $('#dealer').append(card);
+     } else {
+       console.log("else");
+       console.log('error => ', error);
+     }
+  });
+});
