@@ -28,192 +28,198 @@
             <th>Revendedor</th>
           </tr>
         </thead>
-        <tbody>          
+        <tbody>
         </tbody>
       </table>
-      </div>      
-      <hr />
-      <br>
     </div>
+    <hr />
+    <br>
+  </div>
 
-    <form>
-      <div class="container">
-
-        <h2>Consultar a cadeia por id</h2>
-
-        <div class="form-group">
-          <label for="chainId">Id da cadeia:</label>
-          <input type="text" class="form-control" id="chainId">
-        </div>
-
-        <hr />
-
-        <!-- Trigger the modal with a button -->
-        <button id="btnAnunciar" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Pesquisar</button>
-
-        <!-- Modal -->
-        <div id="myModal" class="modal fade" role="dialog">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Passo a passo da Cadeia</h4>
-              </div>
-              <div class="modal-body">
-                <div id="producer"></div>
-                <div id="manufacturer"></div>
-                <div id="distributor"></div>
-                <div id="dealer"></div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-      <br><br><br>
-    </form>
-
+  <form>
     <div class="container">
-      <h2>Adicionar Blocos na cadeia</h2>
-      <p>Para iniciar a cadeia corretamente, primeiro adicionar o bloco do produtor. Nos blocos subsequentes, usar o Id da cadeia para unificar o passo-a-passo do produto.</p>
-      <div class="table-responsive">
-        <table id="chainsTable" class="table table-striped table-sm">
-          <tr>
-            <td><button id="setProdutor" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#setProducerModal">Produtor</button></td>
-            <td><button id="setFabricante" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#setFabricanteModal">Fabricante</button></td>
-            <td><button id="setDistribuidor" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#setDistribuidorModal">Distribuidor</button></td>
-            <td><button id="setRevendedor" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#setRevendedorModal">Revendedor</button></td>
-          </tr>
-        </table>
-      </div>      
-    </div>
 
-    <!-- Modal Produtor-->
-    <div id="setProducerModal" class="modal fade" role="dialog">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-body">
-            <h1>Cadastro pelo produtor</h1>
-              <form>
-                <div class="form-group">
-                  <label for="prodId">Identificador da Cadeia:</label>
-                  <input type="text" class="form-control" id="prodId">
-                </div>
-                <div class="form-group">
-                  <label for="name">Nome:</label>
-                  <input type="text" class="form-control" id="name">
-                </div>
-                <div class="form-group">
-                  <label for="category">Categoria:</label>
-                  <input type="text" class="form-control" id="category">
-                </div>
-                <div class="form-group">
-                  <label for="description">Descrição:</label>
-                  <input type="text" class="form-control" id="description">
-                </div>
-                <div class="form-group">
-                  <label for="weight">Peso:</label>
-                  <input type="text" class="form-control" id="weight">
-                </div>
-                <button id="btnAdicionarProdutor" class="btn btn-primary">Enviar</button>
-              </form>
+      <h2>Consultar a cadeia por id</h2>
+
+      <div class="form-group">
+        <label for="chainId">Id da cadeia:</label>
+        <input type="text" class="form-control" id="chainId">
+      </div>
+
+      <hr />
+
+      <!-- Trigger the modal with a button -->
+      <button id="btnAnunciar" type="button" class="btn btn-info btn-lg" data-toggle="modal"
+        data-target="#myModal">Pesquisar</button>
+
+      <!-- Modal -->
+      <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Passo a passo da Cadeia</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body" style="overflow: auto; min-height: 300px; max-height: 300px;">
+              <div id="producer"></div>
+              <div id="manufacturer"></div>
+              <div id="distributor"></div>
+              <div id="dealer"></div>
+            </div>
+            <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div> -->
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Modal Fabricante-->
-    <div id="setFabricanteModal" class="modal fade" role="dialog">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-body">
-            <h1>Cadastro pelo Fabricante</h1>
-              <form>
-                <div class="form-group">
-                  <label for="FabrId">Identificador da Cadeia:</label>
-                  <input type="text" class="form-control" id="FabrId">
-                </div>
-                <div class="form-group">
-                  <label for="productF">Novo Produto:</label>
-                  <input type="text" class="form-control" id="productF">
-                </div>
-                <div class="form-group">
-                  <label for="shelfLife">Validade:</label>
-                  <input type="text" class="form-control" id="shelfLife">
-                </div>
-                <div class="form-group">
-                  <label for="packageType">Tipo de Embalagem:</label>
-                  <input type="text" class="form-control" id="packageType">
-                </div>
-                <button id="btnAdicionarFabricante" class="btn btn-primary">Enviar</button>
-              </form>
-          </div>
+    </div>
+    <br><br><br>
+  </form>
+
+  <div class="container">
+    <h2>Adicionar Blocos na cadeia</h2>
+    <p>Para iniciar a cadeia corretamente, primeiro adicionar o bloco do produtor. Nos blocos subsequentes, usar o Id da
+      cadeia para unificar o passo-a-passo do produto.</p>
+    <div class="table-responsive">
+      <table id="chainsTable" class="table table-striped table-sm">
+        <tr>
+          <td><button id="setProdutor" type="button" class="btn btn-info btn-lg" data-toggle="modal"
+              data-target="#setProducerModal">Produtor</button></td>
+          <td><button id="setFabricante" type="button" class="btn btn-info btn-lg" data-toggle="modal"
+              data-target="#setFabricanteModal">Fabricante</button></td>
+          <td><button id="setDistribuidor" type="button" class="btn btn-info btn-lg" data-toggle="modal"
+              data-target="#setDistribuidorModal">Distribuidor</button></td>
+          <td><button id="setRevendedor" type="button" class="btn btn-info btn-lg" data-toggle="modal"
+              data-target="#setRevendedorModal">Revendedor</button></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- Modal Produtor-->
+  <div id="setProducerModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <h1>Cadastro pelo produtor</h1>
+          <form>
+            <div class="form-group">
+              <label for="prodId">Identificador da Cadeia:</label>
+              <input type="text" class="form-control" id="prodId">
+            </div>
+            <div class="form-group">
+              <label for="name">Nome:</label>
+              <input type="text" class="form-control" id="name">
+            </div>
+            <div class="form-group">
+              <label for="category">Categoria:</label>
+              <input type="text" class="form-control" id="category">
+            </div>
+            <div class="form-group">
+              <label for="description">Descrição:</label>
+              <input type="text" class="form-control" id="description">
+            </div>
+            <div class="form-group">
+              <label for="weight">Peso:</label>
+              <input type="text" class="form-control" id="weight">
+            </div>
+            <button id="btnAdicionarProdutor" class="btn btn-primary">Enviar</button>
+          </form>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- Modal Distribuidor -->
-    <div id="setDistribuidorModal" class="modal fade" role="dialog">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-body">
-            <h1>Cadastro pelo Distribuidor</h1>
-              <form>
-                <div class="form-group">
-                  <label for="DistId">Identificador da Cadeia:</label>
-                  <input type="text" class="form-control" id="DistId">
-                </div>
-                <div class="form-group">
-                  <label for="recipient">Recipiente:</label>
-                  <input type="text" class="form-control" id="recipient">
-                </div>
-                <div class="form-group">
-                  <label for="transportType">Tipo de Transporte:</label>
-                  <input type="text" class="form-control" id="transportType">
-                </div>
-                <div class="form-group">
-                  <label for="estimatedReceivingDate">Data Estimada de Recebimento:</label>
-                  <input type="text" class="form-control" id="estimatedReceivingDate">
-                </div>
-                <button id="btnAdicionarDistribuidor" class="btn btn-primary">Enviar</button>
-              </form>
-          </div>
+  <!-- Modal Fabricante-->
+  <div id="setFabricanteModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <h1>Cadastro pelo Fabricante</h1>
+          <form>
+            <div class="form-group">
+              <label for="FabrId">Identificador da Cadeia:</label>
+              <input type="text" class="form-control" id="FabrId">
+            </div>
+            <div class="form-group">
+              <label for="productF">Novo Produto:</label>
+              <input type="text" class="form-control" id="productF">
+            </div>
+            <div class="form-group">
+              <label for="shelfLife">Validade:</label>
+              <input type="text" class="form-control" id="shelfLife">
+            </div>
+            <div class="form-group">
+              <label for="packageType">Tipo de Embalagem:</label>
+              <input type="text" class="form-control" id="packageType">
+            </div>
+            <button id="btnAdicionarFabricante" class="btn btn-primary">Enviar</button>
+          </form>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- Modal Revendedor-->
-    <div id="setRevendedorModal" class="modal fade" role="dialog">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-body">
-            <h1>Cadastro pelo Revendedor</h1>
-              <form>
-                <div class="form-group">
-                  <label for="RevId">Identificador da Cadeia:</label>
-                  <input type="text" class="form-control" id="RevId">
-                </div>
-                <div class="form-group">
-                  <label for="resellerName">Nome do Revendedor:</label>
-                  <input type="text" class="form-control" id="resellerName">
-                </div>
-                <div class="form-group">
-                  <label for="storageLocation">Local de Armazenamento:</label>
-                  <input type="text" class="form-control" id="storageLocation">
-                </div>
-                <div class="form-group">
-                  <label for="temperature">Temperatura:</label>
-                  <input type="text" class="form-control" id="temperature">
-                </div>
-                <button id="btnAdicionarRevendedor" class="btn btn-primary">Enviar</button>
-              </form>
-          </div>
+  <!-- Modal Distribuidor -->
+  <div id="setDistribuidorModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <h1>Cadastro pelo Distribuidor</h1>
+          <form>
+            <div class="form-group">
+              <label for="DistId">Identificador da Cadeia:</label>
+              <input type="text" class="form-control" id="DistId">
+            </div>
+            <div class="form-group">
+              <label for="recipient">Recipiente:</label>
+              <input type="text" class="form-control" id="recipient">
+            </div>
+            <div class="form-group">
+              <label for="transportType">Tipo de Transporte:</label>
+              <input type="text" class="form-control" id="transportType">
+            </div>
+            <div class="form-group">
+              <label for="estimatedReceivingDate">Data Estimada de Recebimento:</label>
+              <input type="text" class="form-control" id="estimatedReceivingDate">
+            </div>
+            <button id="btnAdicionarDistribuidor" class="btn btn-primary">Enviar</button>
+          </form>
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- Modal Revendedor-->
+  <div id="setRevendedorModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <h1>Cadastro pelo Revendedor</h1>
+          <form>
+            <div class="form-group">
+              <label for="RevId">Identificador da Cadeia:</label>
+              <input type="text" class="form-control" id="RevId">
+            </div>
+            <div class="form-group">
+              <label for="resellerName">Nome do Revendedor:</label>
+              <input type="text" class="form-control" id="resellerName">
+            </div>
+            <div class="form-group">
+              <label for="storageLocation">Local de Armazenamento:</label>
+              <input type="text" class="form-control" id="storageLocation">
+            </div>
+            <div class="form-group">
+              <label for="temperature">Temperatura:</label>
+              <input type="text" class="form-control" id="temperature">
+            </div>
+            <button id="btnAdicionarRevendedor" class="btn btn-primary">Enviar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 
   </div>
 
